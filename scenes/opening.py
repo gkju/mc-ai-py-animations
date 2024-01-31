@@ -12,7 +12,7 @@ class TicTacToe(MobjectTable):
     b = cross.set_color(BLUE).scale(0.5)
     a = Circle().set_color(RED).scale(0.5)
     c = b.copy().set_color(BLACK)
-    self.board = [[b.copy() if moves[i][j] == 1 else a.copy() if moves[i][j] == -1 else c.copy() for i in range(3)] for j in range(3)]
+    self.board = [[b.copy() if moves[i][j] == 1 else a.copy() if moves[i][j] == -1 else c.copy() for j in range(3)] for i in range(3)]
     super().__init__(self.board)
 
 example_games = [
@@ -121,8 +121,13 @@ class OpeningManim(Scene):
     self.wait(2)
     self.play(FadeOut(c), FadeOut(matrix))
     self.wait(2)
+
+    myTemplate = TexTemplate()
+    myTemplate.add_to_preamble(txt=r"\usepackage{ragged2e}")
+
     Theorem = VGroup(Tex(r"\textbf{Tw. (Zermelo): }"),
-                     Tex(r"Kazda skonczona gra z doskonala informacja ma strategie wygrywajaca ("
-                                             r"nieprzegrywajaca) dla jednego (obu) z graczy.")).arrange(DOWN)
+                     Tex(r"""\justifying{Kazda skonczona gra z doskonala informacja
+                      ma strategie \\ wygrywajaca (nieprzegrywajaca)
+                       dla jednego (obu) z graczy.}""", tex_template=myTemplate)).arrange(DOWN)
     self.play(Write(Theorem))
     self.wait(2)
